@@ -2,11 +2,8 @@
 let words = ["hello": ["ru": "Привет", "en":"Hello"],"day": ["ru": "День", "en":"Day", "pt": "Dia"],"terms": ["en": "Terms", "pt":"Termos"]]
 //аргументы командной строки
 let arguments = CommandLine.arguments 
-//проверка на наличие ключей
-let indexKeyk = arguments.firstIndex(of: "-k") ?? -1
-let indexKeyl = arguments.firstIndex(of: "-l") ?? -1
 //если оба ключа есть
-if indexKeyk != -1 && indexKeyl != -1{
+if let indexKeyk = arguments.firstIndex(of: "-k"), let indexKeyl = arguments.firstIndex(of: "-l"){
   //если после какого-либо ключа не указано значение
   if indexKeyk + 1 == arguments.endIndex || indexKeyl + 1 == arguments.endIndex{
     print("Not found")
@@ -19,7 +16,7 @@ if indexKeyk != -1 && indexKeyl != -1{
     }
   }
 //если есть только ключ -k
-}else if indexKeyk != -1{
+}else if let indexKeyk = arguments.firstIndex(of: "-k"){
   //если после ключа не указано значение
   if indexKeyk + 1 == arguments.endIndex{
     print("Not found")
@@ -35,7 +32,7 @@ if indexKeyk != -1 && indexKeyl != -1{
     }
   }
 //если есть только ключ -l
-} else if indexKeyl != -1{
+} else if let indexKeyl = arguments.firstIndex(of: "-l"){
   //если после ключа не указано значение
   if indexKeyl + 1 == arguments.endIndex{
     print("Not found")
